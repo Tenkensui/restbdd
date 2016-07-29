@@ -32,7 +32,7 @@ public class RestServiceTest {
         restTemplate = Mockito.mock(RestTemplate.class);
         user = new User();
         when(restTemplate.getForObject(anyString(), any(Class.class), any(Map.class))).thenReturn(user);
-        when(restTemplate.postForObject(anyString(), Matchers.anyObject(), any(Class.class), any(Map.class))).thenReturn(new User());
+        when(restTemplate.postForObject(anyString(), Matchers.anyObject(), any(Class.class), any(Map.class))).thenReturn(user);
         doNothing().when(restTemplate).put(anyString(), Matchers.anyObject(), any(Map.class));
         doNothing().when(restTemplate).delete(anyString(), any(Map.class));
         restService = new RestService(restTemplate);
