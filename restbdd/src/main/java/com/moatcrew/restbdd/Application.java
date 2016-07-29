@@ -1,7 +1,5 @@
 package com.moatcrew.restbdd;
 
-import com.moatcrew.restbdd.model.User;
-import com.moatcrew.restbdd.rest.RestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -21,10 +19,6 @@ public class Application implements CommandLineRunner {
     }
 
     public void run(String... strings) throws Exception {
-        RestService<User[]> userService = new RestService<User[]>(User[].class);
-        User[] users = userService.getObjectFromUrl("http://moifi.com:8080/social-expo-server/users");
-        for (User user : users) {
-            log.info(user.toString());
-        }
+
     }
 }
