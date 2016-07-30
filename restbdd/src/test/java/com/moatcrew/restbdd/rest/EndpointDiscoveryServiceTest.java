@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collection;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.greaterThan;
 
@@ -24,7 +24,7 @@ public class EndpointDiscoveryServiceTest {
 
     @Test
     public void testGetContextEndpoints() throws Exception {
-        Collection<Endpoint> endpoints = endpointDiscoveryService.getContextEndpoints();
+        Map<String, Endpoint> endpoints = endpointDiscoveryService.getContextEndpoints();
         Assert.assertNotNull(endpoints);
         Assert.assertThat("No endpoints found", endpoints.size(), greaterThan(0));
     }

@@ -5,7 +5,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -15,9 +14,8 @@ public class EndpointDiscoveryService implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    public Collection<Endpoint> getContextEndpoints() {
-        Map<String, Endpoint> endpointMap = this.applicationContext.getBeansOfType(Endpoint.class);
-        return endpointMap.values();
+    public Map<String, Endpoint> getContextEndpoints() {
+        return this.applicationContext.getBeansOfType(Endpoint.class);
     }
 
     @Override
