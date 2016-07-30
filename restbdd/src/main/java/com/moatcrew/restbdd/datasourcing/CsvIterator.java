@@ -36,7 +36,7 @@ public class CsvIterator {
                                                       boolean header, char separator, char quotechar) {
         ArrayList<String> errors = new ArrayList<String>();
         ArrayList<ArrayList<String>> data =
-                getFileData(filePath, sheetNumber, header, separator, quotechar);
+                getFileData(filePath, header, separator, quotechar);
         if (data == null) {
             String errorMessage = "Error reading the file '" + filePath + "'";
             errors.add(errorMessage);
@@ -160,7 +160,7 @@ public class CsvIterator {
 
 
     public static ArrayList<ArrayList<String>> getFileData(String filePath,
-                                                           int sheetNumber, boolean header, char separator, char quotechar) {
+                                                           boolean header, char separator, char quotechar) {
         if  (filePath.endsWith(".csv")) {
             return getCsvData(filePath, header, separator, quotechar);
         } else {
