@@ -3,7 +3,6 @@ package com.moatcrew.restbdd.rest;
 import com.moatcrew.restbdd.model.Endpoint;
 import com.moatcrew.restbdd.model.User;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
