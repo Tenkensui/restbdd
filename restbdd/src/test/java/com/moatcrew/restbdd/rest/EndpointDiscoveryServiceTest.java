@@ -13,7 +13,8 @@ import java.util.Map;
 import static org.hamcrest.Matchers.greaterThan;
 
 /**
- * Created by maruku on 7/30/16.
+ * Created by maruku
+ * on 7/30/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/test-application-context.xml")
