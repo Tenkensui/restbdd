@@ -5,7 +5,13 @@
 
     <bean id="endpointDiscoveryService" class="com.moatcrew.restbdd.rest.EndpointDiscoveryService"/>
 
+    <bean id="restService" class="com.moatcrew.restbdd.rest.RestService"/>
+
     <bean id="usersEndpoint" class="com.moatcrew.restbdd.model.Endpoint">
         <constructor-arg value="http://moifi.com:8080/social-expo-server/users" />
+    </bean>
+
+    <bean id="userEndpoint" class="com.moatcrew.restbdd.model.Endpoint">
+        <constructor-arg value="http://moifi.com:8080/social-expo-server/user?name={name}" />
     </bean>
 </beans>
