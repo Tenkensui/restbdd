@@ -1,15 +1,14 @@
 package com.moatcrew.restbdd.datasourcing;
 
-import java.io.FileReader;
+import au.com.bytecode.opencsv.CSVReader;
+import com.moatcrew.restbdd.jbehave.AbstractSteps;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import au.com.bytecode.opencsv.CSVReader;
-import com.moatcrew.restbdd.jbehave.DemoTestExecutor;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * Created by tensh on 31/07/2016.
@@ -31,7 +30,7 @@ public class CsvIterator {
      * @param quotechar   [csv] the character to use for quoted elements
      * @return an array list with the error messages
      */
-    public static ArrayList<String> fileTestExecution(DemoTestExecutor testClass,
+    public static ArrayList<String> fileTestExecution(AbstractSteps testClass,
                                                       String methodName, String filePath, int sheetNumber,
                                                       boolean header, char separator, char quotechar) {
         ArrayList<String> errors = new ArrayList<String>();
@@ -120,49 +119,13 @@ public class CsvIterator {
         return errors;
     }
 
-    /**
-     * Reads a csv file and returns a matrix with the cell values
-     *
-     * @param filePath  File path
-     * @param header    true if the first row is the header and has no data
-     * @param separator the delimiter to use for separating entries
-     * @param quotechar the character to use for quoted elements
-     * @return the matrix with the csv data
-     */
-    private static ArrayList<ArrayList<String>> getCsvData(String filePath,
-                                                           boolean header, char separator, char quotechar) {
-        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-        logger.debug("Getting data from csv '" + filePath + "'");
-
-        try {
-            char escape = '\\';
-            int line = header ? 1 : 0;
-
-            CSVReader reader =
-                    new CSVReader(new FileReader(filePath), separator,
-                            quotechar, escape, line);
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                ArrayList<String> rowData = new ArrayList<String>();
-                for (String col : nextLine) {
-                    rowData.add(col);
-                }
-                data.add(rowData);
-            }
-            reader.close();
-        } catch (Exception e) {
-            logger.error("Error reading the csv file '" + filePath + "': " + e);
-            return null;
-        }
-
-        return data;
-    }
 
 
     public static ArrayList<ArrayList<String>> getFileData(String filePath,
                                                            boolean header, char separator, char quotechar) {
+        ArrayList<ArrayList<String>> csvReader = new CsvReader().getCsvData(filePath ,header, separator, quotechar);
         if  (filePath.endsWith(".csv")) {
-            return getCsvData(filePath, header, separator, quotechar);
+            return csvReader;
         } else {
             logger.error("Error reading the file '" + filePath
                     + "': the file format must be csv, xls or xlsx");
