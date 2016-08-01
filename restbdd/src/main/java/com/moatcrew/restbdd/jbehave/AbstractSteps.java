@@ -1,8 +1,12 @@
 package com.moatcrew.restbdd.jbehave;
 
+import com.moatcrew.restbdd.datasourcing.CsvReader;
+import com.moatcrew.restbdd.rest.EndpointDiscoveryService;
+import com.moatcrew.restbdd.rest.RestService;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.BeforeStories;
 import org.jbehave.core.steps.Steps;
+import org.junit.Assert;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -19,6 +23,10 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
     private Map<String, Collection<AssertionError>> assertionErrors;
+    private EndpointDiscoveryService endpointDiscoveryService;
+    private RestService restService;
+    private CsvReader csvReader;
+
     private String contextCsvFileName;
     private String contextEndpointName;
     private String contextHttpMethod;
@@ -29,9 +37,15 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
         assertionErrors = new LinkedHashMap<>();
     }
 
-    @BeforeScenario
-    public void setup() {
-        // TODO datasourcing for scenario?
+//    @BeforeScenario
+//    public void setup() {
+//        // TODO datasourcing for scenario?
+//    }
+
+    protected void loadData() {
+        Assert.assertNotNull("Csv file name is null", contextCsvFileName);
+
+        csvReader.getCsvData(contextCsvFileName);
     }
 
     public String getContextCsvFileName() {
@@ -71,4 +85,15 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
         this.applicationContext = applicationContext;
     }
 
+    public void setEndpointDiscoveryService(EndpointDiscoveryService endpointDiscoveryService) {
+        this.endpointDiscoveryService = endpointDiscoveryService;
+    }
+
+    public void setRestService(RestService restService) {
+        this.restService = restService;
+    }
+
+    public void setCsvReader(CsvReader csvReader) {
+        this.csvReader = csvReader;
+    }
 }

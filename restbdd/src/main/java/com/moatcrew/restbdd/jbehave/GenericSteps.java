@@ -1,5 +1,8 @@
 package com.moatcrew.restbdd.jbehave;
 
+import com.moatcrew.restbdd.datasourcing.CsvReader;
+import com.moatcrew.restbdd.rest.EndpointDiscoveryService;
+import com.moatcrew.restbdd.rest.RestService;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -12,7 +15,8 @@ public class GenericSteps extends AbstractSteps {
 
     @Given("the input file $csvFileName")
     public void givenCsv(String csvFileName) {
-        setContextCsvFileName(csvFileName);
+        setContextCsvFileName(csvFileName + ".csv");
+        loadData();
     }
 
     @When("the endpoint $endpointName is called using HTTP METHOD $httpMethod")
@@ -25,4 +29,6 @@ public class GenericSteps extends AbstractSteps {
     public void thenResponseShouldBe(String response) {
         setContextExpectedResponse(response);
     }
+
+
 }

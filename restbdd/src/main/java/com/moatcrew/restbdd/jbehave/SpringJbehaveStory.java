@@ -7,7 +7,11 @@ import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.io.StoryLoader;
 import org.jbehave.core.junit.JUnitStories;
+import org.jbehave.core.steps.InjectableStepsFactory;
+import org.jbehave.core.steps.spring.SpringStepsFactory;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
@@ -18,8 +22,15 @@ import java.util.List;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class SpringJbehaveStory extends JUnitStories{
+public class SpringJbehaveStory extends JUnitStories {
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Override
+    public InjectableStepsFactory stepsFactory() {
+        return new SpringStepsFactory(configuration(), applicationContext);
+    }
 
     @Override
     protected List<String> storyPaths() {

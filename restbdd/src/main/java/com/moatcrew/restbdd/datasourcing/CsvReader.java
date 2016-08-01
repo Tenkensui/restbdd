@@ -13,6 +13,9 @@ import java.util.ArrayList;
 public class CsvReader {
 
     private static Log logger = LogFactory.getLog(CsvReader.class);
+    private boolean hasHeader;
+    private char separator;
+    private char quotechar;
 
     /**
      * Reads a csv file and returns a matrix with the cell values
@@ -23,14 +26,13 @@ public class CsvReader {
      * @param quotechar the character to use for quoted elements
      * @return the matrix with the csv data
      */
-    public ArrayList<ArrayList<String>> getCsvData(String filePath,
-                                                           boolean header, char separator, char quotechar) {
-        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+    public ArrayList<ArrayList<String>> getCsvData(String filePath) {
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
         logger.debug("Getting data from csv '" + filePath + "'");
 
         try {
             char escape = '\\';
-            int line = header ? 1 : 0;
+            int line = hasHeader ? 1 : 0;
 
             CSVReader reader =
                     new CSVReader(new FileReader(filePath), separator,
@@ -50,5 +52,11 @@ public class CsvReader {
         }
 
         return data;
+    }
+
+    public CsvReader(boolean hasHeader, char separator, char quotechar) {
+        this.hasHeader = hasHeader;
+        this.separator = separator;
+        this.quotechar = quotechar;
     }
 }

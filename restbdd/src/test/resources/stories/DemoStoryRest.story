@@ -6,6 +6,6 @@ I want to perform an action
 So that I can achieve a business goal
 
 Scenario: scenario description
-Given the input file $csvFileName
-When the endpoint $endpointName is called using HTTP METHOD $httpMethod
-Then response should be $response
+Given the input file testData
+When the endpoint usersEndpoint is called using HTTP METHOD GET
+Then response should be 200
