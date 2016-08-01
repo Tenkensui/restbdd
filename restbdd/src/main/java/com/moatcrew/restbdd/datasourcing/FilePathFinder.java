@@ -1,7 +1,6 @@
 package com.moatcrew.restbdd.datasourcing;
 
 import com.moatcrew.restbdd.jbehave.DemoTestExecutor;
-import com.sun.javafx.util.Utils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -18,7 +17,7 @@ public class FilePathFinder {
     /**
      * Class logger
      */
-    private static Log logger = LogFactory.getLog(Utils.class);
+    private static Log logger = LogFactory.getLog(FilePathFinder.class);
 
     /**
      * @return the name of the class
