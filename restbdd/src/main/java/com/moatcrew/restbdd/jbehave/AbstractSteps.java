@@ -28,6 +28,7 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
     private RestService restService;
     private CsvReader csvReader;
 
+    private String contextHttpResult;
     private String contextCsvFileName;
     private String contextEndpointName;
     private String contextHttpMethod;
@@ -115,5 +116,17 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
 
     public EndpointDiscoveryService getEndpointDiscoveryService() {
         return endpointDiscoveryService;
+    }
+
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    public String getContextHttpResult() {
+        return contextHttpResult;
+    }
+
+    public void setContextHttpResult(String contextHttpResult) {
+        this.contextHttpResult = contextHttpResult;
     }
 }

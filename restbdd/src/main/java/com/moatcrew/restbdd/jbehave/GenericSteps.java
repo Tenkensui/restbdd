@@ -2,12 +2,15 @@ package com.moatcrew.restbdd.jbehave;
 
 import com.moatcrew.restbdd.datasourcing.CsvReader;
 import com.moatcrew.restbdd.model.Endpoint;
+import com.moatcrew.restbdd.model.User;
 import com.moatcrew.restbdd.rest.EndpointDiscoveryService;
 import com.moatcrew.restbdd.rest.RestCallback;
 import com.moatcrew.restbdd.rest.RestService;
+import org.hamcrest.Matchers;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 import org.springframework.http.HttpMethod;
 
 import java.io.IOException;
@@ -40,10 +43,10 @@ public class GenericSteps extends AbstractSteps {
             // Run
             Map<String, Endpoint> endpointMap = getEndpointDiscoveryService().getContextEndpoints();
             Endpoint endpoint = endpointMap.get(getContextEndpointName());
-            getRestService().call(endpoint.getUrl(), null, paramMap, HttpMethod.resolve(getContextHttpMethod()), new RestCallback<Object>() {
+            getRestService().call(endpoint.getUrl(), User.class, paramMap, HttpMethod.resolve(getContextHttpMethod()), new RestCallback<User>() {
                 @Override
-                public void onResponse(Object response) {
-                    System.out.println("bla");
+                public void onResponse(User response) {
+                    setContextHttpResult("200");
                 }
             });
         }
@@ -53,6 +56,7 @@ public class GenericSteps extends AbstractSteps {
     @Then("response should be $response")
     public void thenResponseShouldBe(String response) {
         setContextExpectedResponse(response);
+        Assert.assertThat("Expected response not found.", getContextHttpResult(), Matchers.equalTo(response));
     }
 
 
