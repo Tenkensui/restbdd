@@ -35,8 +35,8 @@ public class ExampleIntegrationTest {
     public void testPost() throws Exception {
         Map<String, Endpoint> endpointMap = endpointDiscoveryService.getContextEndpoints();
         Map<String, Object> urlVariables = new HashMap<>();
-        urlVariables.put("postId", 1);
-        String url = endpointMap.get("commentsEndpoint").getUrl();
+        urlVariables.put("name", "Maruku");
+        String url = endpointMap.get("userEndpoint").getUrl();
         restService.call(url, User.class, urlVariables, HttpMethod.GET, new RestCallback<User>() {
             @Override
             public void onResponse(User response) {
