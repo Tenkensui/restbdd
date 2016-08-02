@@ -13,7 +13,7 @@
         <constructor-arg name="separator" value="|"/>
     </bean>
 
-    <bean id="abstractSteps" class="com.moatcrew.restbdd.jbehave.AbstractSteps" abstract="true">
+    <bean id="abstractSteps" class="com.moatcrew.restbdd.jbehave.AbstractSteps">
         <property name="csvReader" ref="csvReader"/>
         <property name="endpointDiscoveryService" ref="endpointDiscoveryService"/>
         <property name="restService" ref="restService"/>
@@ -21,11 +21,8 @@
 
     <bean id="genericSteps" class="com.moatcrew.restbdd.jbehave.GenericSteps" parent="abstractSteps"/>
 
-    <bean id="usersEndpoint" class="com.moatcrew.restbdd.model.Endpoint">
-        <constructor-arg value="http://moifi.com:8080/social-expo-server/users" />
+    <bean id="commentsEndpoint" class="com.moatcrew.restbdd.model.Endpoint">
+        <constructor-arg value="https://jsonplaceholder.typicode.com/comments?postId={postId}" />
     </bean>
 
-    <bean id="userEndpoint" class="com.moatcrew.restbdd.model.Endpoint">
-        <constructor-arg value="http://moifi.com:8080/social-expo-server/user?name={name}" />
-    </bean>
 </beans>

@@ -10,8 +10,12 @@ import org.junit.Assert;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,15 +41,21 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
         assertionErrors = new LinkedHashMap<>();
     }
 
-//    @BeforeScenario
-//    public void setup() {
-//        // TODO datasourcing for scenario?
-//    }
+    @BeforeScenario
+    public void setup() {
 
-    protected void loadData() {
+    }
+
+    void loadData() {
         Assert.assertNotNull("Csv file name is null", contextCsvFileName);
+        Resource resource = new ClassPathResource(contextCsvFileName);
 
-        csvReader.getCsvData(contextCsvFileName);
+        try {
+            csvReader.getCsvData(resource.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            // TODO: Log and handle
+            e.printStackTrace();
+        }
     }
 
     public String getContextCsvFileName() {
