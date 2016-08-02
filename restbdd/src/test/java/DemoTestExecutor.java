@@ -1,5 +1,4 @@
-package com.moatcrew.restbdd.jbehave;
-
+import com.moatcrew.restbdd.jbehave.SpringJbehaveStory;
 import org.springframework.test.context.ContextConfiguration;
 
 /**

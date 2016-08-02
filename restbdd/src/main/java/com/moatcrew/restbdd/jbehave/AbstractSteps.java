@@ -14,10 +14,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by maruku
@@ -46,15 +43,16 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
 
     }
 
-    void loadData() {
+    ArrayList<ArrayList<String>> loadData() {
         Assert.assertNotNull("Csv file name is null", contextCsvFileName);
         Resource resource = new ClassPathResource(contextCsvFileName);
 
         try {
-            csvReader.getCsvData(resource.getFile().getAbsolutePath());
+            return csvReader.getCsvData(resource.getFile().getAbsolutePath());
         } catch (IOException e) {
             // TODO: Log and handle
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -105,5 +103,17 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
 
     public void setCsvReader(CsvReader csvReader) {
         this.csvReader = csvReader;
+    }
+
+    public CsvReader getCsvReader() {
+        return csvReader;
+    }
+
+    public RestService getRestService() {
+        return restService;
+    }
+
+    public EndpointDiscoveryService getEndpointDiscoveryService() {
+        return endpointDiscoveryService;
     }
 }
