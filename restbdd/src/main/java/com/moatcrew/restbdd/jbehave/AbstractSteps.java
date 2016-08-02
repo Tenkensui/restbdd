@@ -35,6 +35,7 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
     private String contextEndpointName;
     private String contextHttpMethod;
     private String contextExpectedResponse;
+    private String contextHttpResult;
 
     @BeforeStories
     public void initialize() {
@@ -43,7 +44,11 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
 
     @BeforeScenario
     public void setup() {
-
+        contextCsvFileName = "";
+        contextEndpointName = "";
+        contextExpectedResponse = "";
+        contextHttpMethod = "";
+        contextHttpResult = "";
     }
 
     void loadData() {
@@ -105,5 +110,13 @@ public class AbstractSteps extends Steps implements ApplicationContextAware {
 
     public void setCsvReader(CsvReader csvReader) {
         this.csvReader = csvReader;
+    }
+
+    public String getContextHttpResult() {
+        return contextHttpResult;
+    }
+
+    public void setContextHttpResult(String contextHttpResult) {
+        this.contextHttpResult = contextHttpResult;
     }
 }

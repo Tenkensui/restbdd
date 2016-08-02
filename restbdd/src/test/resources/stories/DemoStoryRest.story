@@ -7,5 +7,5 @@ So that I can achieve a business goal
 
 Scenario: scenario description
 Given the input file testData
-When the endpoint postEndpoint is called using HTTP METHOD GET
+When the endpoint userEndpoint is called using HTTP METHOD GET
 Then response should be 200
