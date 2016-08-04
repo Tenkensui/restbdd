@@ -1,6 +1,5 @@
 package com.moatcrew.restbdd.datasourcing;
 
-import au.com.bytecode.opencsv.CSVReader;
 import com.moatcrew.restbdd.jbehave.AbstractSteps;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -123,14 +122,14 @@ public class CsvIterator {
 
     public static ArrayList<ArrayList<String>> getFileData(String filePath,
                                                            boolean header, char separator, char quotechar) {
-        ArrayList<ArrayList<String>> csvReader = new CsvReader().getCsvData(filePath ,header, separator, quotechar);
-        if  (filePath.endsWith(".csv")) {
-            return csvReader;
-        } else {
-            logger.error("Error reading the file '" + filePath
-                    + "': the file format must be csv, xls or xlsx");
+//        ArrayList<ArrayList<String>> csvReader = new CsvReader().getCsvData(filePath ,header, separator, quotechar);
+//        if  (filePath.endsWith(".csv")) {
+//            return csvReader;
+//        } else {
+//            logger.error("Error reading the file '" + filePath
+//                    + "': the file format must be csv, xls or xlsx");
             return null;
-        }
+//        }
     }
 
 

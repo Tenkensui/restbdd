@@ -7,6 +7,20 @@
 
     <bean id="restService" class="com.moatcrew.restbdd.rest.RestService"/>
 
+    <bean id="csvReader" class="com.moatcrew.restbdd.datasourcing.CsvReader">
+        <constructor-arg name="hasHeader" value="true"/>
+        <constructor-arg name="quotechar" value="'"/>
+        <constructor-arg name="separator" value="|"/>
+    </bean>
+
+    <bean id="abstractSteps" class="com.moatcrew.restbdd.jbehave.AbstractSteps">
+        <property name="csvReader" ref="csvReader"/>
+        <property name="endpointDiscoveryService" ref="endpointDiscoveryService"/>
+        <property name="restService" ref="restService"/>
+    </bean>
+
+    <bean id="genericSteps" class="com.moatcrew.restbdd.jbehave.GenericSteps" parent="abstractSteps"/>
+
     <bean id="usersEndpoint" class="com.moatcrew.restbdd.model.Endpoint">
         <constructor-arg value="http://moifi.com:8080/social-expo-server/users" />
     </bean>
